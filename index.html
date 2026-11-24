@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var desc = Object.getOwnPropertyDescriptor(window, "fetch");
+          if (desc && desc.get && !desc.set && desc.configurable) {
+            Object.defineProperty(window, "fetch", {
+              get: desc.get,
+              set: function () {},
+              configurable: true,
+              enumerable: desc.enumerable,
+            });
+          }
+        } catch (_) {}
+
+        window.addEventListener(
+          "error",
+          function (event) {
+            var src = (event && (event.filename || (event.error && event.error.stack))) || "";
+            var msg = (event && (event.message || (event.error && event.error.message))) || "";
+            if (
+              typeof src === "string" &&
+              (src.indexOf("chrome-extension://") !== -1 || src.indexOf("moz-extension://") !== -1) &&
+              typeof msg === "string" &&
+              msg.indexOf("Cannot set property fetch") !== -1
+            ) {
+              event.preventDefault();
+              event.stopImmediatePropagation();
+            }
+          },
+          true
+        );
+      })();
+    </script>
+    <title>VoxControl — Local Desktop Voice Assistant</title>
+    <meta name="description" content="Modular Python desktop voice assistant workbench with faster-whisper STT, Gemini 2.5 Flash function calling, OS-aware automation tools, safety guardrails, live intent simulator, and project export." />
+    <meta property="og:title" content="VoxControl — Local Desktop Voice Assistant" />
+    <meta property="og:description" content="Modular Python desktop voice assistant workbench with faster-whisper STT, Gemini 2.5 Flash function calling, OS-aware automation tools, safety guardrails, live intent simulator, and project export." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

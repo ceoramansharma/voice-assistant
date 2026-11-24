@@ -1,0 +1,6 @@
+{
+  "name": "VoxControl — Local Desktop Voice Assistant",
+  "description": "Modular Python desktop voice assistant workbench with faster-whisper STT, Gemini 2.5 Flash function calling, OS-aware automation tools, safety guardrails, live intent simulator, and project export.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
